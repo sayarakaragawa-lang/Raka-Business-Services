@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raka Ragawa — Business Operations Consultant, Bali</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F5F0;
+    --surface: #EDEAE3;
+    --border: #D8D4CB;
+    --text: #1A1A18;
+    --muted: #8A8780;
+    --accent: #8B6F3E;
+    --accent-dim: #B8965A;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: linear-gradient(to bottom, rgba(247,245,240,0.97), transparent);
+  }
+
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-dim);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav-cta:hover { color: var(--white); border-color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(196,164,107,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 100px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--text);
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 56px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  /* JOURNEY BAR — signature element */
+  .journey {
+    padding: 0 48px;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .journey-inner {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .journey-inner::-webkit-scrollbar { display: none; }
+
+  .journey-step {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .journey-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    padding: 0 24px;
+  }
+
+  .journey-step:first-child .journey-content { padding-left: 0; }
+
+  .journey-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .journey-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .journey-price {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .journey-arrow {
+    color: var(--border);
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: color 0.3s;
+  }
+
+  .journey-step:hover .journey-arrow { color: var(--accent-dim); }
+  .journey-step:hover .journey-label { color: var(--accent); }
+
+  /* PACKAGES */
+  .packages {
+    padding: 0 48px;
+  }
+
+  .package {
+    border-bottom: 1px solid var(--border);
+    padding: 80px 0;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .package.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pkg-left { position: relative; }
+
+  .pkg-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+
+  .pkg-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .pkg-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .pkg-duration {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .pkg-right {}
+
+  .pkg-description {
+    font-size: 15px;
+    color: #5A5855;
+    line-height: 1.9;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .pkg-description strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .pkg-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin-bottom: 16px;
+  }
+
+  .pkg-list {
+    list-style: none;
+    margin-bottom: 36px;
+  }
+
+  .pkg-list li {
+    font-size: 14px;
+    color: #4A4845;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(37,37,32,0.6);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-weight: 300;
+  }
+
+  .pkg-list li::before {
+    content: '—';
+    color: var(--accent-dim);
+    flex-shrink: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    margin-top: 1px;
+  }
+
+  .pkg-outcome {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-top: 4px;
+  }
+
+  .pkg-outcome p {
+    font-size: 14px;
+    color: #3A3835;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  /* ADDON */
+  .addon {
+    padding: 56px 48px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .addon-left {}
+
+  .addon-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin-bottom: 12px;
+  }
+
+  .addon-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .addon-desc {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .addon-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 120px 48px;
+    text-align: center;
+    position: relative;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(196,164,107,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-title em { font-style: italic; color: var(--accent); }
+
+  .cta-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: var(--accent);
+    color: var(--white);
+    transform: translateY(-1px);
+  }
+
+  .cta-note {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 0 24px 64px; }
+    .hero-meta { gap: 28px; }
+    .journey { padding: 0 24px; }
+    .packages { padding: 0 24px; }
+    .package {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 56px 0;
+    }
+    .addon {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 40px 24px;
+    }
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .package { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Raka Ragawa</span>
+  <a href="https://wa.me/6281338233769" target="_blank" class="nav-cta">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Business Operations & Digital Systems — Bali</p>
+  <h1 class="hero-title">Work software<br>is for <em>efficiency.</em></h1>
+  <p class="hero-sub">I build the operational infrastructure that lets business owners focus on growing their business — not running it.</p>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <span class="hero-stat-num">40%</span>
+      <span class="hero-stat-label">Admin overhead reduced</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">60%</span>
+      <span class="hero-stat-label">Faster booking processing</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">80%</span>
+      <span class="hero-stat-label">Less manual data entry</span>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY BAR -->
+<div class="journey">
+  <div class="journey-inner">
+    <div class="journey-step">
+      <div class="journey-content">
+        <span class="journey-num">01</span>
+        <span class="journey-label">The Diagnostic</span>
+        <span class="journey-price">USD 350 — 500</span>
+      </div>
+      <span class="journey-arrow">→</span>
+    </div>
+    <div class="journey-step">
+      <div class="journey-content">
+        <span class="journey-num">02</span>
+        <span class="journey-label">The Operating System</span>
+        <span class="journey-price">USD 1,500 — 2,000</span>
+      </div>
+      <span class="journey-arrow">→</span>
+    </div>
+    <div class="journey-step">
+      <div class="journey-content">
+        <span class="journey-num">03</span>
+        <span class="journey-label">Total Build</span>
+        <span class="journey-price">USD 2,500 — 3,500</span>
+      </div>
+      <span class="journey-arrow">→</span>
+    </div>
+    <div class="journey-step">
+      <div class="journey-content">
+        <span class="journey-num">04</span>
+        <span class="journey-label">Ops Partner</span>
+        <span class="journey-price">USD 300 — 600 / mo</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGES -->
+<section class="packages">
+
+  <!-- Package 1 -->
+  <div class="package">
+    <div class="pkg-left">
+      <p class="pkg-num">Package 01</p>
+      <h2 class="pkg-name">The<br>Diagnostic</h2>
+      <p class="pkg-price">USD 350 — 500</p>
+      <p class="pkg-duration">3 to 5 Business Days</p>
+    </div>
+    <div class="pkg-right">
+      <p class="pkg-description">Most businesses do not know exactly where they are losing time, money, or clarity. <strong>The Diagnostic is where we find out.</strong> Before any system is built or any dollar is spent on transformation, this engagement gives you the full picture.</p>
+      <p class="pkg-section-label">What is included</p>
+      <ul class="pkg-list">
+        <li>Full operational audit of your current workflows and tools</li>
+        <li>Identification of bottlenecks, redundancies, and gaps</li>
+        <li>Prioritized roadmap with recommended solutions</li>
+        <li>Delivery via written report and a 60-minute walkthrough call</li>
+      </ul>
+      <p class="pkg-section-label">Outcome</p>
+      <div class="pkg-outcome">
+        <p>You will have a clear, honest picture of where your business stands operationally and a concrete plan for what to do next. No guesswork.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Package 2 -->
+  <div class="package">
+    <div class="pkg-left">
+      <p class="pkg-num">Package 02</p>
+      <h2 class="pkg-name">The Operating<br>System</h2>
+      <p class="pkg-price">USD 1,500 — 2,000</p>
+      <p class="pkg-duration">2 to 3 Weeks</p>
+    </div>
+    <div class="pkg-right">
+      <p class="pkg-description">Your business needs a central nervous system. A place where everything lives, everyone knows what to do, and <strong>you can see the full picture without asking five different people.</strong> That is what this package builds.</p>
+      <p class="pkg-section-label">What is included</p>
+      <ul class="pkg-list">
+        <li>Custom Project Management System (Notion, ClickUp, or Monday.com)</li>
+        <li>CRM implementation with pipeline and lead tracking</li>
+        <li>Executive Dashboard for real-time business visibility</li>
+        <li>Core SOPs for daily operations</li>
+        <li>Team onboarding and handover session</li>
+      </ul>
+      <p class="pkg-section-label">Outcome</p>
+      <div class="pkg-outcome">
+        <p>Your business will have one centralized system where operations, projects, clients, and reporting all live. Your team knows what they are doing. You know what is happening. And you are no longer the bottleneck.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Package 3 -->
+  <div class="package">
+    <div class="pkg-left">
+      <p class="pkg-num">Package 03</p>
+      <h2 class="pkg-name">Total<br>Build</h2>
+      <p class="pkg-price">USD 2,500 — 3,500</p>
+      <p class="pkg-duration">4 to 6 Weeks</p>
+    </div>
+    <div class="pkg-right">
+      <p class="pkg-description">This is the full transformation. For businesses that are serious about moving from how things have been done to how they should be done. <strong>Every manual process gets automated. Every disconnected tool gets integrated.</strong> Every data point gets a home.</p>
+      <p class="pkg-section-label">What is included</p>
+      <ul class="pkg-list">
+        <li>Everything in The Operating System</li>
+        <li>Automation flows connecting your tools and eliminating manual steps</li>
+        <li>Database migration and data architecture</li>
+        <li>Integration of existing systems into one unified workflow</li>
+        <li>Custom reporting and executive dashboards</li>
+        <li>Full team training and documentation</li>
+        <li>Two weeks of post-launch support</li>
+      </ul>
+      <p class="pkg-section-label">Outcome</p>
+      <div class="pkg-outcome">
+        <p>Your entire operation runs on a clean, automated, integrated system. Your team operates with clarity. Manual work is the exception, not the rule. And your business is built to scale.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Package 4 -->
+  <div class="package">
+    <div class="pkg-left">
+      <p class="pkg-num">Package 04</p>
+      <h2 class="pkg-name">Ops<br>Partner</h2>
+      <p class="pkg-price">USD 300 — 600 / mo</p>
+      <p class="pkg-duration">Ongoing</p>
+    </div>
+    <div class="pkg-right">
+      <p class="pkg-description">Systems need to evolve as your business does. Ops Partner is for clients who want <strong>someone in their corner on an ongoing basis</strong> — someone who knows their systems deeply, keeps everything running, and helps them make smart operational decisions as they grow.</p>
+      <p class="pkg-section-label">What is included</p>
+      <ul class="pkg-list">
+        <li>Monthly system monitoring and maintenance</li>
+        <li>Updates and optimizations as your business evolves</li>
+        <li>Priority support for operational issues</li>
+        <li>Monthly ops review and recommendations</li>
+        <li>On-call advisory for decisions involving your systems or workflows</li>
+      </ul>
+      <p class="pkg-section-label">Outcome</p>
+      <div class="pkg-outcome">
+        <p>Your systems stay current, your operations stay clean, and you always have someone who knows your business deeply to call when things need to move fast.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ADDON -->
+<div class="addon">
+  <div class="addon-left">
+    <p class="addon-tag">Add-on</p>
+    <p class="addon-name">Website Design & Development</p>
+    <p class="addon-desc">Available as an add-on to The Operating System or Total Build. Includes website redesign, development, and optimization tailored to your business.</p>
+  </div>
+  <p class="addon-price">+ USD 500 — 800</p>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="cta-eyebrow">Limited Projects — September 2026</p>
+  <h2 class="cta-title">Let us find out where your business is <em>losing ground.</em></h2>
+  <p class="cta-sub">All engagements begin with a free 30-minute discovery call.</p>
+  <a href="https://wa.me/6281338233769?text=Hi%20Raka%2C%20I%20came%20across%20your%20services%20and%20I%27d%20like%20to%20book%20a%20free%20discovery%20call." target="_blank" class="cta-btn">Book a Free Discovery Call</a>
+  <p class="cta-note">Currently accepting a limited number of projects for September.</p>
+</section>
+
+<footer>
+  <span class="footer-name">Raka Ragawa — Bali, Indonesia</span>
+  <span class="footer-right">Business Operations & Digital Systems Consultant</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.package').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
